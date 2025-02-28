@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:yandex_map_test/yandex_map.dart';
+import 'package:yandex_maps_mapkit_lite/init.dart' as init;
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Intl.defaultLocale = 'en';
+  await init.initMapkit(
+      apiKey: '41c142ba-42f3-4ffc-8231-7451a35c6355'
+  );
   runApp(const MyApp());
 }
 

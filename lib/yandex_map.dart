@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
+import 'package:yandex_maps_mapkit_lite/mapkit.dart';
+import 'package:yandex_maps_mapkit_lite/yandex_map.dart';
 
 class YandexMapPage extends StatefulWidget {
   const YandexMapPage({super.key});
@@ -12,14 +13,14 @@ class YandexMapPage extends StatefulWidget {
 }
 
 class _YandexMapPageState extends State<YandexMapPage> {
-  late final YandexMapController _yandexMapController;
+  // late final YandexMapController _yandexMapController;
 
   final double _currentZoom = 10;
 
-  final _animConfig = const MapAnimation(
-    type: MapAnimationType.smooth,
-    duration: 0.1,
-  );
+  // final _animConfig = const MapAnimation(
+  //   type: MapAnimationType.smooth,
+  //   duration: 0.1,
+  // );
 
   Future<Position> checkPermission() async {
     late bool serviceEnabled;
@@ -48,36 +49,36 @@ class _YandexMapPageState extends State<YandexMapPage> {
     return await Geolocator.getCurrentPosition();
   }
 
+  MapWindow? mapWindow;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: YandexMap(
-        onMapCreated: (controller) async {
-          _yandexMapController = controller;
+        onMapCreated: (mapWindow) async {
 
-          final currentPosition = await checkPermission();
-          log('currentPosition: $currentPosition');
-          await moveCameraToPosition(
-            Point(
-              latitude: currentPosition.latitude,
-              longitude: currentPosition.longitude,
-            ),
-          );
-        },
-        onCameraPositionChanged: (pos, reason, ended) async {
-          log('pos: ${pos.target}, reason: $reason, ended: $ended');
-          // await moveCameraToPosition(pos.target);
+          mapWindow = mapWindow;
+
+          // final currentPosition = await checkPermission();
+          // log('currentPosition: $currentPosition');
+          // await moveCameraToPosition(
+          //   Point(
+          //     latitude: currentPosition.latitude,
+          //     longitude: currentPosition.longitude,
+          //   ),
+          // );
         },
       ),
     );
   }
 
   Future<void> moveCameraToPosition(Point pointTarget) async {
-    await _yandexMapController.moveCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(target: pointTarget, zoom: _currentZoom),
-      ),
-      animation: _animConfig,
-    );
+
+    // await _yandexMapController.moveCamera(
+    //   CameraUpdate.newCameraPosition(
+    //     CameraPosition(target: pointTarget, zoom: _currentZoom),
+    //   ),
+    //   animation: _animConfig,
+    // );
   }
 }
