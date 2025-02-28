@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yandex_map_test/yandex_map.dart';
-import 'package:yandex_maps_mapkit_lite/init.dart' as init;
+import 'package:yandex_maps_mapkit/init.dart' as init;
 
 
 void main() async {
